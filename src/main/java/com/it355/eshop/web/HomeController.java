@@ -1,7 +1,6 @@
 package com.it355.eshop.web;
 
 import com.it355.eshop.store.Shop;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
