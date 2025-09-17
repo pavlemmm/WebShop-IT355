@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>E-shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" th:href="@{/}">E-shop</a>
+    <nav class="nav">
+        <a th:href="@{/products}">Products</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h1 class="page-title">Welcome to E-shop</h1>
+
+    <section class="card">
+        <div class="card-header">
+            <h2 class="card-title">Featured products</h2>
+            <a class="btn btn-primary" th:href="@{/products}">Manage Products</a>
+        </div>
+
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                <tr><th>Name</th><th class="ta-right">Price</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${products}">
+                    <td th:text="${p.name}"></td>
+                    <td class="ta-right" th:text="${#numbers.formatDecimal(p.price, 1, 'COMMA', 2, 'POINT')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">© IT355 mini e-shop</footer>
+</body>
+</html>

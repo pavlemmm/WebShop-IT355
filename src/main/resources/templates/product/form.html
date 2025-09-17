@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${product.id == null ? 'New product' : 'Edit product'}">Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" th:href="@{/}">E-shop</a>
+    <nav class="nav">
+        <a th:href="@{/products}">Products</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="page-bar">
+        <h1 class="page-title" th:text="${product.id == null ? 'New product' : 'Edit product'}"></h1>
+    </div>
+
+    <section class="card">
+        <form th:action="@{/products}" th:object="${product}" method="post" class="form">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="grid">
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input id="name" th:field="*{name}" type="text" placeholder="e.g. Lenovo IdeaPad" required />
+                </div>
+
+                <div class="field">
+                    <label for="price">Price</label>
+                    <input id="price" th:field="*{price}" type="number" step="0.01" min="0" placeholder="0.00" required />
+                </div>
+            </div>
+
+            <div class="actions">
+                <a class="btn btn-ghost" th:href="@{/products}">Cancel</a>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer class="footer">© IT355 mini e-shop</footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Products · E-shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<header class="navbar">
+    <a class="brand" th:href="@{/}">E-shop</a>
+    <nav class="nav">
+        <a class="active" th:href="@{/products}">Products</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="page-bar">
+        <h1 class="page-title">Products</h1>
+        <a class="btn btn-primary" th:href="@{/products/new}">+ Add product</a>
+    </div>
+
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table table-hover">
+                <thead>
+                <tr><th>#</th><th>Name</th><th class="ta-right">Price</th><th class="ta-right">Actions</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="p,iter : ${products}">
+                    <td th:text="${iter.index + 1}"></td>
+                    <td th:text="${p.name}"></td>
+                    <td class="ta-right" th:text="${#numbers.formatDecimal(p.price, 1, 'COMMA', 2, 'POINT')}"></td>
+                    <td class="ta-right">
+                        <a class="btn btn-ghost" th:href="@{|/products/${p.id}/edit|}">Edit</a>
+                        <form th:action="@{|/products/${p.id}/delete|}" method="post" class="inline">
+                            <button class="btn btn-danger" type="submit"
+                                    onclick="return confirm('Delete this product?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(products)}">
+                    <td colspan="4" class="muted ta-center">No products yet.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">© IT355 mini e-shop</footer>
+</body>
+</html>
